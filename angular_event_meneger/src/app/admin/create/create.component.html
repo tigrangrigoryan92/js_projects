@@ -1,0 +1,150 @@
+<div class="modal-page-background"></div>
+
+<div class="modal-page create-form">
+
+    <div class="title">
+        <h2>Create</h2>
+    </div>
+
+    <form [formGroup]="createForm" (ngSubmit)="createEvent()">
+        <div class="form-control name">
+            <label>Name
+                <input type="text" formControlName="name">
+            </label>
+            <div
+                    *ngIf="createForm.get('name').touched && createForm.get('name').invalid">
+                <small
+                        *ngIf="createForm.get('name').errors.required"
+                >Name is required.
+                </small>
+                <small *ngIf="createForm.get('name').errors.minlength">
+                    Name must be minimum
+                    {{createForm.get('name').errors.minlength.requiredLength}}
+                    symbols. Now it is
+                    {{createForm.get('name').errors.minlength.actualLength}}
+                    symbols.
+                </small>
+                <small *ngIf="createForm.get('name').errors.maxlength">
+                    Name must be maximum
+                    {{createForm.get('name').errors.maxlength.requiredLength}}
+                    symbols. Now it is
+                    {{createForm.get('name').errors.maxlength.actualLength}}
+                    symbols.
+                </small>
+            </div>
+        </div>
+
+
+        <div class="form-control types">
+            <label>Type
+                <br>
+                <select formControlName="eventType">
+                    <option [value]="null" selected disabled>Select Category</option>
+                    <option
+                            *ngFor="let type of allEventTypes"
+                            [value]="type.value">{{type.type}}
+                    </option>
+                </select>
+            </label>
+            <div
+                    *ngIf="createForm.get('eventType').touched && createForm.get('eventType').invalid">
+                <small
+                        *ngIf="createForm.get('eventType').errors.required"
+                >Type is required.
+                </small>
+            </div>
+        </div>
+
+
+        <div class="form-control date">
+            <label>Date
+                <input
+                        type="datetime-local"
+                        formControlName="date"
+                        min="{{now| date: 'yyyy-MM-dd'}}T{{now| date:'hh:mm'}}"
+                >
+            </label>
+            <div
+                    *ngIf="createForm.get('date').touched && createForm.get('date').invalid">
+                <small
+                        *ngIf="createForm.get('date').errors.required"
+                >Date is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-control desc">
+            <label>Description
+                <br>
+                <textarea placeholder="Describe the event..." rows="3" formControlName="description"></textarea>
+            </label>
+            <div
+                    *ngIf="createForm.get('description').touched && createForm.get('description').invalid">
+                <small
+                        *ngIf="createForm.get('description').errors.required"
+                >Description is required.
+                </small>
+                <small *ngIf="createForm.get('description').errors.minlength">
+                    Description must be minimum
+                    {{createForm.get('description').errors.minlength.requiredLength}}
+                    symbols. Now it is
+                    {{createForm.get('description').errors.minlength.actualLength}}
+                    symbols.
+                </small>
+                <small *ngIf="createForm.get('description').errors.maxlength">
+                    Description must be maximum
+                    {{createForm.get('description').errors.maxlength.requiredLength}}
+                    symbols. Now it is
+                    {{createForm.get('description').errors.maxlength.actualLength}}
+                    symbols.
+                </small>
+            </div>
+        </div>
+
+        <!--        IMAGE UPLOADING-->
+        <!--        <div class="form-control">
+                    <label class="image-upload-container btn btn-bwm">
+                        <span>Select Image</span>
+                        <input #imageInput
+                               type="file"
+                               accept="image/*"
+                               (change)="processFile(imageInput)">
+                    </label>
+
+                    <div *ngIf="selectedFile" class="img-preview-container">
+
+                        <div class="img-preview{{selectedFile.status === 'fail' ? '-error' : ''}}"
+                             [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+                        </div>
+
+                        <div *ngIf="selectedFile.pending" class="img-loading-overlay">
+                            <div class="img-spinning-circle"></div>
+                        </div>
+
+                        <div *ngIf="selectedFile.status === 'ok'" class="alert alert-success"> Image Uploaded Succesfuly!</div>
+                        <div *ngIf="selectedFile.status === 'fail'" class="alert alert-danger"> Image Upload Failed!</div>
+                    </div>
+                </div> -->
+
+
+        <div class="form-buttons">
+            <button
+                    type="submit"
+                    [class.success]="createForm.valid"
+                    [disabled]="createForm.invalid"
+            >Add
+            </button>
+            <button
+                    class="danger"
+                    type="button"
+                    (click)="cancelCreatePage()"
+            >Cancel
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+
+

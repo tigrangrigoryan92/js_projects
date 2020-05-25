@@ -1,0 +1,380 @@
+// Variables
+//===================================================================
+:root {
+  --main-color: #626d78;
+  --main-durker-color: #3a4550;
+  --danger-color: #A02F2F;
+  --danger-hover-color: #632020;
+  --success-color: #217339;
+  --success-hover-color: #1f5128;
+}
+
+// Main Styles
+//===================================================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Tahoma", sans-serif;
+}
+
+body {
+  background: url('assets/main/bg.png') no-repeat fixed;
+  background-size: 100% 100%;
+}
+
+body:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  background: rgba(255, 255, 255, .4);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+// Form, inputs, selects, textarea
+//===================================================================
+input, select, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .2) inset;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  font-size: 16px;
+  resize: none;
+
+  &:focus {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .2);
+  }
+}
+
+input[type=file] {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+label {
+  color: var(--main-durker-color);
+  font-size: 18px;
+}
+
+// Buttons
+//===================================================================
+button {
+  width: 100%;
+  font-size: 20px;
+  outline: 0;
+  border: 0;
+  background: var(--main-color);
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.login {
+    padding: 12px;
+  }
+
+  &.logout {
+    padding: 5px 10px;
+    margin-bottom: 0;
+  }
+
+  &.create {
+    //width: auto;
+    max-width: 150px;
+    padding: 10px 5px;
+  }
+
+  &.danger {
+    background: var(--danger-color);
+
+    &:hover {
+      background-color: var(--danger-hover-color);
+    }
+  }
+
+  &.action-btn {
+    background-color: transparent;
+    border: none;
+    color: #5d6d79;;
+    cursor: pointer;
+    outline: none;
+    font-size: 24px;
+
+    i {
+      background-color: transparent;
+
+      &:hover {
+        background: none;
+      }
+    }
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  &.success {
+    background: var(--success-color);
+
+    &:hover {
+      background-color: var(--success-hover-color);
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(75, 85, 97, 0.2);
+    background: var(--main-durker-color);
+  }
+
+  &:disabled {
+    background: var(--danger-color);
+    cursor: not-allowed;
+  }
+}
+
+//For modal pages
+//===================================================================
+.modal-page-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.44);
+}
+
+.modal-page {
+  padding: 30px 20px;
+  background: rgba(166, 166, 166, 0.78);
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 5px;
+
+  .form-control {
+    margin-bottom: 10px;
+
+    input, select, textarea {
+      margin: 10px 0 0;
+
+      &.ng-invalid.ng-touched {
+        box-shadow: 0 0 2px 2px var(--danger-color) inset;
+      }
+    }
+
+    small {
+      color: var(--danger-color);
+    }
+  }
+
+  .form-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      padding: 5px 10px;
+      width: auto;
+    }
+  }
+
+  &.create-form, &.edit-form {
+    min-width: 420px;
+  }
+
+  .title {
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 32px;
+      text-align: center;
+      color: var(--main-durker-color);
+    }
+  }
+}
+
+//Main Container
+//===================================================================
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+}
+
+
+//Loading animation
+//===================================================================
+.loading {
+  margin-top: 50px;
+  text-align: center;
+
+  .spinner {
+    margin: 10px auto 0;
+    width: 100px;
+    text-align: center;
+  }
+
+  .spinner > div {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    background-color: #333;
+
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .spinner .bounce1 {
+    animation-delay: -0.32s;
+  }
+
+  .spinner .bounce2 {
+    animation-delay: -0.16s;
+  }
+
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1.0);
+    }
+  }
+}
+
+
+//<div class="modal-page-background"></div>
+//
+//<div class="modal-page create-form">
+//
+//<div class="title">
+//<h2>Create</h2>
+//</div>
+//
+//<form [formGroup]="createForm" (ngSubmit)="createEvent()">
+//<div class="form-control name">
+//<label>Name
+//<input type="text" formControlName="name">
+//</label>
+//<div
+// *ngIf="createForm.get('name').touched && createForm.get('name').invalid">
+//<small
+// *ngIf="createForm.get('name').errors.required"
+//>Name is required.
+//</small>
+//<small *ngIf="createForm.get('name').errors.minlength">
+//                                                      Name must be minimum
+//                                                      {{createForm.get('name').errors.minlength.requiredLength}}
+//symbols. Now it is
+//{{createForm.get('name').errors.minlength.actualLength}}
+//symbols.
+//</small>
+//<small *ngIf="createForm.get('name').errors.maxlength">
+//                                                      Name must be maximum
+//                                                      {{createForm.get('name').errors.maxlength.requiredLength}}
+//symbols. Now it is
+//{{createForm.get('name').errors.maxlength.actualLength}}
+//symbols.
+//</small>
+//</div>
+//</div>
+//
+//
+//<div class="form-control types">
+//<label>Type
+//<br>
+//<select formControlName="eventType">
+//<option [value]="null" selected disabled>Select Category</option>
+//<option
+// *ngFor="let type of allEventTypes"
+//[value]="type.value">{{type.type}}
+//</option>
+//</select>
+//</label>
+//<div
+// *ngIf="createForm.get('eventType').touched && createForm.get('eventType').invalid">
+//<small
+// *ngIf="createForm.get('eventType').errors.required"
+//>Type is required.
+//</small>
+//</div>
+//</div>
+//
+//
+//<div class="form-control date">
+//<label>Date
+//<input
+// type="datetime-local"
+//formControlName="date"
+//min="{{now| date: 'yyyy-MM-dd'}}T{{now| date:'hh:mm'}}"
+//>
+//</label>
+//<div
+// *ngIf="createForm.get('date').touched && createForm.get('date').invalid">
+//<small
+// *ngIf="createForm.get('date').errors.required"
+//>Date is required.
+//</small>
+//</div>
+//</div>
+//
+//<div class="form-control desc">
+//<label>Description
+//<br>
+//<textarea placeholder="Describe the event..." rows="3" formControlName="description"></textarea>
+//</label>
+//<div
+// *ngIf="createForm.get('description').touched && createForm.get('description').invalid">
+//<small
+// *ngIf="createForm.get('description').errors.required"
+//>Description is required.
+//</small>
+//<small *ngIf="createForm.get('description').errors.minlength">
+//                                                             Description must be minimum
+//                                                             {{createForm.get('description').errors.minlength.requiredLength}}
+//symbols. Now it is
+//{{createForm.get('description').errors.minlength.actualLength}}
+//symbols.
+//</small>
+//<small *ngIf="createForm.get('description').errors.maxlength">
+//                                                             Description must be maximum
+//                                                             {{createForm.get('description').errors.maxlength.requiredLength}}
+//symbols. Now it is
+//{{createForm.get('description').errors.maxlength.actualLength}}
+//symbols.
+//</small>
+//</div>
+//</div>
+//
+//<div class="form-buttons">
+//<button
+// type="submit"
+//[class.success]="createForm.valid"
+//[disabled]="createForm.invalid"
+//>Add
+//</button>
+//<button
+// class="danger"
+//type="button"
+//(click)="cancelCreatePage()"
+//>Cancel
+//</button>
+//</div>
+//
+//</form>
+//
+//</div>
+
+
+

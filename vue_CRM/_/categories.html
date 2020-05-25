@@ -1,0 +1,51 @@
+<script>
+  import {required, minValue} from 'vuelidate/lib/validators';
+
+  export default {
+    name: 'record',
+    data: () => ({
+      loading: true,
+      select: null,
+      categories: [],
+      category: null,
+      type: 'outcome',
+      amount: 1,
+      description: ''
+
+    }),
+    validations: {
+      amount: {minValue: minValue(1)},
+      description: {required}
+    },
+    methods: {
+      submitHandler() {
+        console.log('valid', this.$v);
+        if (this.$v.invalid) {
+          this.$v.$touch();
+          console.log(this.$v);
+          return
+        }
+
+
+      }
+    },
+    async mounted() {
+      this.categories = await this.$store.dispatch('fetchCategories');
+      this.loading = false;
+
+      if (this.categories.length) {
+        this.category = this.categories[0].id
+      }
+
+      setTimeout(() => {
+        this.select = M.FormSelect.init(this.$refs.select);
+        M.updateTextFields();
+      }, 0)
+    },
+    destroyed() {
+      if (this.select && this.select.destroyed) {
+        this.select.destroy()
+      }
+    }
+  }
+</script>

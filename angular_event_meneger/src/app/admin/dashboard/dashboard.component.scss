@@ -1,0 +1,81 @@
+.admin-dashboard {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: rgba(166, 166, 166, 0.84);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, .2);
+  padding: 20px;
+  border-radius: 5px;
+
+  .title {
+    h1 {
+      color: #4b5661;
+      text-align: center;
+    }
+  }
+
+  .table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    padding: 20px;
+
+    thead th {
+      font-size: 18px;
+      border: 1px solid #4b5661;
+      background-color: rgba(75, 86, 97, 0.6);
+      color: white;
+      padding: 15px 10px;
+      letter-spacing: 1px;
+      font-weight: normal;
+      text-align: left;
+    }
+
+    tbody td {
+      border: 1px solid #5d6874;
+      color: #37414c;
+      padding: 5px 10px;
+    }
+
+
+
+    tr th:nth-child(5),
+    tr th:nth-child(6),
+    tr td:nth-child(5),
+    tr td:nth-child(6) {
+      text-align: center;
+    }
+    tr td:nth-child(2) {
+      word-break: break-word;
+    }
+
+    tr:nth-child(odd) {background-color: #959595;}
+
+  }
+}
+
+.dashboard-action-btn {
+  width: auto;
+  background: none;
+  box-shadow: none;
+  color: var(--main-color);
+  cursor: pointer;
+  outline: none;
+  font-size: 24px;
+
+  &.del {
+    i:hover {
+      color: var(--danger-color);
+    }
+  }
+
+  :hover {
+    color: var(--main-durker-color);;
+    background: none;
+  }
+}
+
+
+
+
+

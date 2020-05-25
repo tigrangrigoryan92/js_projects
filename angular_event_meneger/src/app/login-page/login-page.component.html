@@ -1,0 +1,45 @@
+<div class="form">
+
+    <div class="thumbnail">
+        <img src="../../assets/main/admin.png">
+    </div>
+
+    <div class="validation" *ngIf="errorMsg">
+        <span>{{errorMsg}}</span>
+    </div>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <div class="form-control">
+            <label>
+                <input
+                        type="text"
+                        placeholder="Email"
+                        formControlName="email" autofocus
+                        [class.red-bordered]="loginForm.invalid && submitted || errorMsg"
+                >
+            </label>
+        </div>
+
+
+        <div class="form-control">
+            <label>
+                <input
+                        type="password"
+                        placeholder="Password"
+                        formControlName="password"
+                        [class.red-bordered]="loginForm.invalid && submitted || errorMsg"
+                >
+
+            </label>
+        </div>
+
+
+        <button class="login"
+                type="submit"
+                id="id"
+        >Login <i class="fas fa-sign-in-alt"></i>
+        </button>
+
+    </form>
+
+</div>

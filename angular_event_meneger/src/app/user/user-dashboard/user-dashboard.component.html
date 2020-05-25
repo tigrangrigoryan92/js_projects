@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<!--<div class="container">-->
+<!--    <app-events-grid *ngIf="allEvents; else noEvents"></app-events-grid>-->
+<!--    <ng-template #noEvents>-->
+<!--        <div class="no-event">-->
+<!--            <div class="title">-->
+<!--                <h1>We don't have events right now.</h1>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </ng-template>-->
+<!--</div>-->
+
+
+<div class="container">
+    <app-events-grid *ngIf="allEvents && allEvents.length"></app-events-grid>
+    <ng-template *ngIf="allEvents && allEvents.length == 0">
+        <div class="no-event">
+            <div class="title">
+                <h1>We don't have events right now.</h1>
+            </div>
+        </div>
+    </ng-template>
+    <div class="no-event" *ngIf="allEvents && allEvents.length == 0">
+        <div class="title">
+            <h1>We don't have events right now.</h1>
+        </div>
+    </div>
+</div>

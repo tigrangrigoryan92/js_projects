@@ -1,0 +1,20 @@
+<nav class="pagination">
+    <ul class="pagination">
+        <li (click)="onClickPage(activePage - 1)">
+            <a>
+                &laquo;
+            </a>
+        </li>
+        <li *ngFor="let item of pages" (click)="onClickPage(item)">
+            <a [ngClass]="{'active': activePage === item}">
+                {{item}}
+            </a>
+        </li>
+        <li class="active" (click)="onClickPage(activePage + 1)">
+            <a>
+                &raquo;
+            </a>
+        </li>
+    </ul>
+</nav>
+

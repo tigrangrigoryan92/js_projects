@@ -1,0 +1,86 @@
+<div class="modal-page-background"></div>
+
+<div class="modal-page edit-form">
+
+    <div class="title">
+        <h2>Edit</h2>
+    </div>
+
+    <form [formGroup]="editForm" (ngSubmit)="editEvent(event.id)" *ngIf="event && allEventTypes">
+
+        <div class="form-control name">
+            <label>Name
+                <input type="text" formControlName="name">
+            </label>
+        </div>
+
+
+        <div class="form-control types">
+            <label>Type
+                <input type="text" formControlName="eventType" [value]="allEventTypes[event.eventType - 1].type">
+            </label>
+        </div>
+
+
+        <div class="form-control date">
+            <label>Date
+                <input type="datetime-local" formControlName="date">
+            </label>
+            <div
+                    *ngIf="editForm.get('date').touched && editForm.get('date').invalid">
+                <small
+                        *ngIf="editForm.get('date').errors.required"
+                >Date is required.
+                </small>
+            </div>
+        </div>
+
+
+        <div class="form-control desc">
+            <label>Description
+                <br>
+                <textarea cols="30" rows="5" formControlName="description" ></textarea>
+            </label>
+            <div
+                    *ngIf="editForm.get('description').touched && editForm.get('description').invalid">
+                <small
+                        *ngIf="editForm.get('description').errors.required"
+                >Description is required.
+                </small>
+                <small *ngIf="editForm.get('description').errors.minlength">
+                    Description must be minimum
+                    {{editForm.get('description').errors.minlength.requiredLength}}
+                    symbols. Now it is
+                    {{editForm.get('description').errors.minlength.actualLength}}
+                    symbols.
+                </small>
+                <small *ngIf="editForm.get('description').errors.maxlength">
+                    Description must be maximum
+                    {{editForm.get('description').errors.maxlength.requiredLength}}
+                    symbols. Now it is
+                    {{editForm.get('description').errors.maxlength.actualLength}}
+                    symbols.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <button
+                    type="submit"
+                    [class.success]="editForm.valid"
+                    [disabled]="editForm.invalid"
+            >
+                Edit
+            </button>
+            <button
+                    type="button"
+                    class="danger"
+                    (click)="cancelEditPage()">
+                Cancel
+            </button>
+        </div>
+
+    </form>
+
+</div>
+

@@ -1,0 +1,35 @@
+<div class="event" *ngIf="event && allEventTypes" appZoomHover>
+
+    <div class="title">
+        <h3>{{event.name | titlecase}}</h3>
+    </div>
+
+    <div class="photo">
+        <img [src]="img ? img: defaultImg" alt="">
+    </div>
+
+    <div class="description">
+        <div class="description">
+            <small><em>Event Description:</em></small>
+            <p class="description-text">{{event.description}}</p>
+        </div>
+    </div>
+
+    <div class="details">
+        <div class="type">
+            <small><em>Event Type:</em></small>
+            <p class="details-event-type">
+                {{allEventTypes[event.eventType - 1].type }}
+            </p>
+        </div>
+
+        <div class="date">
+            <small><em>Event Date:</em></small>
+            <p class="details-date">
+                {{event.date | date:'yyyy-MM-dd hh:mm'}}
+            </p>
+        </div>
+    </div>
+
+
+</div>

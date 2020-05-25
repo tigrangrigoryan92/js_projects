@@ -1,0 +1,74 @@
+<router-outlet></router-outlet>
+<app-header></app-header>
+
+<div class="container">
+
+    <div class="admin-dashboard" *ngIf="allEventTypes && allEvents; else loading">
+        <div class="title">
+            <h1>Admin Dashboard</h1>
+        </div>
+
+        <div class="create">
+            <button class="create success"
+                    type="button"
+                    routerLink="create"
+            ><i class='fas fa-plus'></i> Add Event
+            </button>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let event of allEvents">
+                <td class="name">{{event.name}}</td>
+                <td class="desc">{{event.description}}</td>
+                <td>{{event.date | date:'dd/MM/yyyy hh:mm'}}</td>
+                <td>{{allEventTypes[event.eventType - 1].type}}</td>
+                <td>
+                    <button class="dashboard-action-btn edit"
+                            [routerLink]="['event', 'edit', event.id]"
+                    ><i class='far'>&#xf044;</i>
+                    </button>
+                </td>
+                <td>
+                    <button
+                            class="dashboard-action-btn del"
+                            [routerLink]="['event', event.id]"
+                    ><i class='far'>&#xf2ed;</i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagination-component">
+            <div>
+                <app-pagination
+                        [totalEventsCount]="totalEventsCount"
+                        [limit]="5"
+                        (onPageChange)="displayActivePage($event)"
+                >
+                </app-pagination>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #loading>
+        <div class="loading">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </ng-template>
+
+</div>

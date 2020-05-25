@@ -1,0 +1,14 @@
+<div class="modal-page-background"></div>
+
+<div class="modal-page" *ngIf="event">
+    <div class="title">
+        <h2>Delete {{event?.name}} event?</h2>
+    </div>
+
+    <div class="btn-action">
+        <button type="button" class="success" (click)="removeEvent()"><i class='fas fa-check'></i></button>
+        <button type="button" class="danger" (click)="cancelDeletePage()"><i class='fas fa-times'></i></button>
+    </div>
+</div>
+
+
